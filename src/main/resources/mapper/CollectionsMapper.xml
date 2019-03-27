@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+        <!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD
+ Mapper 3.0//EN"
+                "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Dao.CollectionsDao">
+<select id="getCollections"  resultType="Collections">
+        select * from collections;
+    </select>
+<select id="findById" parameterType="Int" resultType="Collections">
+    select  * from collections where  id= #{id}
+</select>
+<insert id="addCollections" parameterType="Collections">
+        insert into collections (vid, date, cid) values (#{vid},#{date},#{cid})
+    </insert>
+<delete id="deleteCollections" parameterType="Int">
+    delete from collections where id=#{id}
+</delete>
+</mapper>

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns="http://www.springframework.org/schema/beans"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+
+    <!--<mvc:resources mapping="root" location="WEB-INF/view/"/>-->
+    <!--配置SpringMVC-->
+    <!-- 开启注解 -->
+    <mvc:annotation-driven/>
+    <!-- 静态资源(js、image等)的访问
+        1. 加载对静态资源处理
+        2. 允许/做映射
+    -->
+    <mvc:default-servlet-handler/>
+
+    <!--ViewResolver 视图解析器-->
+    <!--用于支持Servlet、JSP视图解析-->
+    <bean id="jspViewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <!--<property name="viewClavaluealue="org.springframework.web.servlet.view.JstlView"/>-->
+        <!-- 视图渲染 jsp/freemaker/velocity-->
+        <property name="prefix" value="/WEB-INF/View/"/>
+        <property name="suffix" value=".jsp"/>
+    </bean>
+
+    <!--扫描Web相关Bean-->
+    <!--指明 controller 所在包，并扫描其中的注解-->
+    <context:component-scan base-package="Ctrl"/>
+    <!-- 支持上传文件 -->
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <!-- one of the properties available; the maximum file size in bytes -->
+        <property name="maxUploadSize" value="10000000"/>
+
+    </bean>
+
+    <mvc:annotation-driven>
+    <mvc:message-converters>
+        <bean class="org.springframework.http.converter.StringHttpMessageConverter">
+            <property name="supportedMediaTypes">
+                <list>
+                    <value>text/html;charset=UTF-8</value>
+                    <value>text/json;charset=UTF-8</value>
+                    <value>application/json;charset=UTF-8</value>
+                </list>
+            </property>
+        </bean>
+    </mvc:message-converters>
+    </mvc:annotation-driven>
+
+
+</beans>

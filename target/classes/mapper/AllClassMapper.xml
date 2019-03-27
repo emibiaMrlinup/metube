@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD
+ Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Dao.AllClassDao">
+<select id="getAllTypes" resultType="AllClass">
+    select  * from class
+</select>
+    <select id="findById" parameterType="Int" resultType="AllClass">
+        select * from  class where id=#{id}
+    </select>
+    <insert id="addTypes" parameterType="AllClass">
+        insert into class (name ,parentid)values (#{name},#{parentid})
+    </insert>
+    <update id="updateTypes"  parameterType="AllClass" >
+        update class set name =#{name},parentid=#{parentid} where id=#{id}
+    </update>
+    <delete id="deleteTypes" parameterType="AllClass">
+        delete from class where id=#{id}
+    </delete>
+    <delete id="deleteMainTypes" parameterType="AllClass">
+        delete from class where parentid=#{parentid}
+    </delete>
+</mapper>

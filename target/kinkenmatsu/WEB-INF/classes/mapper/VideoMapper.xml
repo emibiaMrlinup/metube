@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD
+ Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Dao.VideoDao">
+<select id="getVideos" resultType="Video">
+    select * from video;
+</select>
+    <select id="findById" parameterType="Int" resultType="Video">
+     select * from video where id=#{id};
+    </select>
+    <select id="searchVideos" parameterType="String" resultType="Video">
+        select * from video
+        <where>
+            <if test="name != null and name != ''">
+                name like CONCAT(CONCAT('%',#{name},'%'))
+            </if>
+        </where>
+        order by id;
+    </select>
+    <insert id="addVideo" parameterType="Video">
+        insert into video (name,detail,url,vpic,childclass,userid,dateshow)value
+        (#{name},#{detail},#{url},#{vpic},#{childclass},#{userid},#{dateshow})
+    </insert>
+    <delete id="deleteVideo" parameterType="Int">
+        delete from video where id = #{id}
+    </delete>
+    <update id="Trialing" parameterType="Video">
+        update video set trial = #{trial} where id=#{id}
+    </update>
+</mapper>
